@@ -13,8 +13,9 @@ module Rack
           address = "-a #{options[:Host]}"
           rack_up_file_path = "-R #{options[:config]}"
           env = "-e #{environment}"
+          pool = "--max-pool-size 2"
 
-          system "passenger start #{port} #{address} #{rack_up_file_path} #{env}"
+          system "passenger start #{[port, address, rack_up_file_path, env, pool].join(' ')}"
         end
 
         def environment
